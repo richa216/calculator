@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Calculator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href ="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+
+   
+
+   .title1
+   {
+       
+       padding-top: 50px;
+       padding-bottom: 50px;
+       padding-left: 10px;
+   }
+
+   input[type="text"]
+   
+   {
+   	width: 100%;
+    background-color: black;
+    color: white;
+
+   }
+
+   input[type="button"]
+   
+   {
+
+   	background-color: black;
+   	width: 50px;
+   	color: white;
+    line-height: 50px;
+    border:none;
+   	
+   	}
+
+  </style>
+
+</head>
+
+<body>
+<div class="container">
+	<div class="title1" ><h3>CALCULATOR</h3></div>
+  <div>
+  <table style="background-color: black;">
+    <tr >
+			<td ><input type="text" id="output" style="height: 40px;"></td>
+	  </tr>
+	</table>
+	<table  style="margin-top: 2px;background-color: black;">
+
+	    	
+	    	<tr>
+	    		
+	    		<td><input type="button" value="1 " onclick="disp('1')"></td>
+	    		<td><input type="button" value="2 " onclick="disp('2')"></td>
+	    		<td><input type="button" value="3 " onclick="disp('3')"></td>
+	    		<td><input type="button" style="background-color: red;" value="C " onclick="clr();"></td>
+		    </tr>
+		
+		    <tr>
+		    	
+		    	<td><input type="button" value="4 " id="four" onclick="disp('4')"></td>
+		    	<td><input type="button" value="5 " id="five" onclick="disp('5')"></td>
+		    	<td><input type="button" value="6 " id="six" onclick="disp('6')"></td>
+		    	<td><input type="button" value="+ " id="ad" onclick="operation('+')" style="background-color: grey;"></td>
+		    </tr>
+		
+		    
+		    <tr>
+		    	
+		    	<td><input type="button" value="7 " id="seven" onclick="disp('7')"></td>
+			    <td><input type="button" value="8 " id="eight" onclick="disp('8')"></td>
+			    <td><input type="button" value="9 " id="nine" onclick="disp('9')"></td>
+			    <td><input type="button" value="- " id="sub" onclick="operation('-')" style="background-color: grey;"></td>
+		    </tr>
+		
+		    
+		    <tr>
+		    	
+		    	<td><input type="button" value=".  " id="point" onclick="disp('.')"></td>
+		    	<td><input type="button" value="0  " id="zero"  onclick="disp('0')"></td>
+		    	<td><input type="button" value="!" id="mul" onclick="operation('!')" style="background-color: grey;"></td>
+		  
+		    	<td><input type="button" value="* " id="mul" onclick="operation('*')" style="background-color: grey;"></td>
+		    </tr>
+		
+		    
+		    <tr>
+		    	
+		    	<td><input type="button" value="x  " id="opnb" onclick="back()" style="background-color: green;"></td>
+		    	
+		    	<td><input type="button" value="^  " id="power" onclick="operation('^')" style="background-color: grey;"></td>
+		    	<td><input type="button" value="% " id="div" onclick="operation('/')" style="background-color: grey;"></td>
+
+		    	<td><input type="button" value="=  " id="eql"  onclick="operation('=')" style="background-color:grey;"></td>
+		    	
+		    
+		    </tr>
+
+	    </table>
+
+    </div>
+  </div>
+	   
+
+    <script>
+
+
+    	 var display=' ';
+    	 var prevVal=0;
+    	 var opt='+';
+    	 var result=0;
+    	 var display1='';
+
+    	 function disp(val)
+    	 {
+    	 	display+=val;
+    	 	document.getElementById('output').value=display;
+    	 	document.getElementById('output').value= display1+display;
+
+    	 }
+    	 function operation(operator)
+    	 {
+          debugger;
+
+
+           if(operator == '=')
+           {
+            switch(opt)
+            {
+
+              case '+':
+              result=parseFloat(parseFloat(prevVal)+parseFloat(display));
+              display1=result;
+              break;
+              case '-':
+              result=parseFloat(parseFloat(prevVal)-parseFloat(display));
+              display1=result;
+              break;
+              case '/':
+              result=parseFloat(parseFloat(prevVal)%parseFloat(display));
+              display1=result;
+              break;
+             case '!':
+              result=factorial(prevVal);
+              display1=result;
+              break;
+
+             case '*':
+              result=parseFloat(parseFloat(prevVal)*parseFloat(display));
+              display1=result;
+              break;
+            case '^':
+             result=parseFloat(parseFloat(prevVal)**parseFloat(display));
+             display1=result;
+             break;
+           default:
+            break;
+           }
+         }
+
+
+         else
+         {
+          switch(opt)
+        {
+          case '+':
+
+           result=parseFloat(parseFloat(prevVal)+parseFloat(display));
+           display1=result+operator;
+
+           break;
+          case '-':
+           result=parseFloat(parseFloat(prevVal)-parseFloat(display));
+           display1=result+operator;
+           break;
+          case '/':
+           result=parseFloat(parseFloat(prevVal)/parseFloat(display));
+           display1=result+operator;
+           break;
+          case '%':
+           result=parseInt(parseInt(prevVal)%parseInt(display));
+           display1=result+operator;
+           break;
+
+           case '*':
+           result=parseFloat(parseFloat(prevVal)*parseFloat(display));
+           display1=result+operator;
+           break;
+            case '^':
+           result=parseFloat(parseFloat(prevVal)**parseFloat(display));
+           display1=result+operator;
+           break;
+           default:
+           display1=result+operator;
+           break;
+
+
+         }
+         }
+
+
+
+
+    	 
+    	 	document.getElementById('output').value=display1;
+    	 	opt=operator;
+    	 	display='';
+    	 	prevVal=result;
+    	 }
+    	 
+      
+
+    function clr()
+    {
+    		 	opt='+';
+    	 	display='';
+    	 	prevVal=0;
+    	 	display1='';
+    	document.getElementById("output").value ="";
+}
+
+
+  function back()
+    	{
+    		a=document.getElementById('output').value;
+
+
+        if(a.length>1)
+        {
+          z=a.slice(0, -1);
+          document.getElementById('output').value=z;
+        
+        
+          console.log(z);
+
+          //display= document.getElementById('output').value;
+        }
+        else
+        {
+        document.getElementById('output')="0";
+        }
+      
+    	
+    	}
+
+
+
+
+         
+function factorial(x)
+{
+    var x
+    if(x==0)
+    {
+        return 1;
+    }
+    else
+    {
+        return x*factorial(x-1);
+    }
+}
+
+</script>
+
+
+
+
+
+
+
+
+    </body>
+</html>
